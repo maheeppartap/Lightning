@@ -8,7 +8,10 @@
 
 class Lightning::Search
 {
+    template<typename T>
+    decltype(auto) linear_search(T[] a){
 
+    }
 };
 
 
