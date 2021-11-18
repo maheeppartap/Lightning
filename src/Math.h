@@ -5,6 +5,8 @@
 #ifndef LIGHTNING_MATH_H
 #define LIGHTNING_MATH_H
 #include "Lightning.h"
+#include <iterator>
+#include <cassert>
 
 /*
  * Todo: Algorithms to be implemented:
@@ -21,25 +23,53 @@ public:
  * finds and returns the median of some iterable object. begin and end are both iterators
  */
 
-    template<typename T>
-    decltype(auto) find_median_sorted(T begin, int len){
-        auto begin_ = std::addressof(begin);
-
+    template<typename S>
+    decltype(auto) find_median_sorted(S begin, S end){
+        while(begin != end){
+            std::cout << *begin;
+            begin++;
+        }
+        std::cout << *begin << std::endl;
         return 1;
     }
 
-template<typename T>
-decltype(auto) find_median(T begin, bool sorted){
-
-    if( !sorted ){
-        return find_median_sorted(begin  );
+    template<typename S>
+    int find_len(S s, S s1) {
+        auto len = 0;
+        while(s != s1){
+            len++;
+            s++;
+        }
+        return len;
     }
 
-    // slower because sorting is needed
-    return find_median_sorted(begin);
+    template<typename S, typename F = std::less<void>>
+    decltype(auto) find_median_unsorted(S begin,
+                                        S end,
+                                        F comparison = {}){
+        std::cout << "Starting test\n";
+        std::sort(begin, end, comparison);
 
-//    for (auto i : temp_) std::cout << i << " ";
-}
+        auto len = this->find_len(begin, end);
+        auto temp = begin;
+        while(temp != end){
+            temp++;
+            std::cout << *begin++;
+        }
+
+        return (len % 2) == 0 ? ((*begin + ((len - 1) / 2)) + ( *begin + (len/2)))/2 : *begin + (len / 2);
+    }
+
+    template<typename T, typename F = std::less<void>>
+    decltype(auto) find_median(T begin,
+                               T end,
+                               bool sorted = false,
+                               F comparison = {}){
+        assert(begin != nullptr);
+        assert(end != nullptr);
+//        return comparison(begin, end);
+        return sorted ? find_median_sorted(begin, end) : find_median_unsorted(begin, end, comparison);
+    }
 };
 
 #endif //LIGHTNING_MATH_H
