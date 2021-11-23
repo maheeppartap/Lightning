@@ -25,12 +25,8 @@ public:
 
     template<typename S>
     decltype(auto) find_median_sorted(S begin, S end){
-        while(begin != end){
-            std::cout << *begin;
-            begin++;
-        }
-        std::cout << *begin << std::endl;
-        return 1;
+        auto len = this->find_len(begin, end);
+        return (len % 2) == 0 ? (*(begin + ((len)/2) - 1) + *(begin + (len)/2)) / 2: *(begin + (len / 2) - 1);
     }
 
     template<typename S>
@@ -44,20 +40,12 @@ public:
     }
 
     template<typename S, typename F = std::less<void>>
-    decltype(auto) find_median_unsorted(S begin,
+    double find_median_unsorted(S begin,
                                         S end,
                                         F comparison = {}){
-        std::cout << "Starting test\n";
         std::sort(begin, end, comparison);
-
         auto len = this->find_len(begin, end);
-        auto temp = begin;
-        while(temp != end){
-            temp++;
-            std::cout << *begin++;
-        }
-
-        return (len % 2) == 0 ? ((*begin + ((len - 1) / 2)) + ( *begin + (len/2)))/2 : *begin + (len / 2);
+        return (len % 2) == 0 ? (*(begin + ((len)/2) - 1) + *(begin + (len)/2))/2: *(begin + (len / 2) - 1);
     }
 
     template<typename T, typename F = std::less<void>>
@@ -67,7 +55,6 @@ public:
                                F comparison = {}){
         assert(begin != nullptr);
         assert(end != nullptr);
-//        return comparison(begin, end);
         return sorted ? find_median_sorted(begin, end) : find_median_unsorted(begin, end, comparison);
     }
 };
