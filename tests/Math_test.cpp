@@ -32,28 +32,26 @@ bool AreDoubleSame(auto dFirstVal, auto dSecondVal)
     return std::fabs(dFirstVal - dSecondVal) < std::numeric_limits<double>::epsilon();
 }
 bool nearlyequal(std::complex<double> a, std::complex<double> b) {
-//    double diff = abs(a - b);
-//    double mag = (abs(a) + abs(b))/2;
-//
-//    return diff <= (mag * DBL_EPSILON * (1ull << ULP_N));
+
     return abs(a - b) < DBL_EPSILON;
 }
 
-TEST_CASE("DISCRETE FOURIER TRANSFORM"){
-    auto* x = new Lightning::Math();
-    SUBCASE("DFT on custom struct array"){
-        typedef std::complex<double> cx;
-        // todo
-//        cx a[] = { cx(0,0), cx(1,1), cx(3,3), cx(4,4),
-//                   cx(4, 4), cx(3, 3), cx(1,1), cx(0,0) };
-//        cx b[8];
-//        x->fft(a, b, 3);
-//        cx rslt[8] = {cx(16, 16), cx(-4.82843,-11.6569), cx(0,0), cx(-0.343146,0.828427), cx(0,0)
-//                      , cx(0.828427,-0.343146), cx(0,0), cx(-11.6569,-4.82843) };
-
-
-//        CHECK(abs(b[0] - rslt[0]) < DBL_EPSILON);
-//        CHECK(nearlyequal(b[1], rslt[1]) == true);
-
-    }
-}
+// todo
+//TEST_CASE("DISCRETE FOURIER TRANSFORM"){
+//    auto* x = new Lightning::Math();
+//    SUBCASE("DFT on custom struct array"){
+//        typedef std::complex<double> cx;
+//
+////        cx a[] = { cx(0,0), cx(1,1), cx(3,3), cx(4,4),
+////                   cx(4, 4), cx(3, 3), cx(1,1), cx(0,0) };
+////        cx b[8];
+////        x->fft(a, b, 3);
+////        cx rslt[8] = {cx(16, 16), cx(-4.82843,-11.6569), cx(0,0), cx(-0.343146,0.828427), cx(0,0)
+////                      , cx(0.828427,-0.343146), cx(0,0), cx(-11.6569,-4.82843) };
+//
+//
+////        CHECK(abs(b[0] - rslt[0]) < DBL_EPSILON);
+////        CHECK(nearlyequal(b[1], rslt[1]) == true);
+//
+//    }
+//}
